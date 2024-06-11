@@ -1,0 +1,13 @@
+/* suppress nested section padding */
+.spreadsheet-wrapper > .section {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.spreadsheet-wrapper > .section:first-of-type {
+  padding-top: 0;
+}
+
+.spreadsheet-wrapper > .section:last-of-type {
+  padding-bottom: 0;
+}
