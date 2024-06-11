@@ -16,6 +16,7 @@
   --link-hover-color: #136ff6;
   --background-color: cyan;
   --light-color: #eee;
+  --light-grey-color: #ccc;
   --dark-color: #ccc;
   --text-color: magenta;
 
@@ -207,4 +208,8 @@ main .section {
 main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
+}
+
+main .section.lightgrey {
+  background-color: var(--light-grey-color);
 }
