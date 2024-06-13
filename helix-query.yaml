@@ -1,4 +1,4 @@
-version: 2
+version: 3
 indices:
   default:
     include:
@@ -29,9 +29,8 @@ indices:
     include:
       - '/assignments/**'
     exclude:
-      - '/assignments'
-      - '/assignments/dummy/'
-    target: /assignments.json
+      - '/assignments/dummy/**'
+    target: /assignments-index.json
     properties:
       title:
         select: head > meta[property="og:title"]
