@@ -10,6 +10,7 @@ indices:
       - '/images/**'
       - '/videos/**'
       - '/fragments/**'
+      - '/assignments'
     target: /query-index.json
     properties:
       lastModified:
