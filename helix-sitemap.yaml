@@ -3,7 +3,9 @@ sitemaps:
     origin: https://main--my-website--bayrakta.hlx.live
     source: /query-index.json
     destination: /sitemap.xml
+    lastmod: YYYY-MM-DD
   assignments:
     origin: https://main--my-website--bayrakta.hlx.live
     source: /assignments.json
     destination: /sitemap-assignments.xml
+    lastmod: YYYY-MM-DD
