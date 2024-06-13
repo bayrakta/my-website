@@ -24,7 +24,7 @@ indices:
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
-  press-releases:
+  assignments:
     include:
       - '/assignments/**'
     exclude:
