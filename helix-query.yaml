@@ -29,6 +29,7 @@ indices:
     include:
       - '/assignments/**'
     exclude:
+      - '/assignments'
       - '/assignments/dummy/'
     target: /assignments.json
     properties:
