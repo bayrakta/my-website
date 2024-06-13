@@ -1,0 +1,5 @@
+sitemaps:
+  allindex:
+    source: /query-index.json
+    destination: /sitemap.xml
+

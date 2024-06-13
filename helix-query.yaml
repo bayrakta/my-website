@@ -1,0 +1,54 @@
+version: 1
+indices:
+  default:
+    include:
+      - '/**'
+    exclude:
+      - '**/nav'
+      - '**/footer'
+      - '/drafts/**'
+      - '/images/**'
+      - '/videos/**'
+      - '/fragments/**'
+    target: /query-index.json
+    properties:
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+  press-releases:
+    include:
+      - '/assignments/**'
+    exclude:
+      - '/assignments/dummy/'
+    target: /assignments.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
+      description:
+          select: head > meta[property="og:description"]
+          value: attribute(el, "content")
+      tags:
+        select: head > meta[property="article:tag"]
+        values: attribute(el, "content")
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      publishDate:
+        select: head > meta[name="publish-date"]
+        value: parseTimestamp(attribute(el, "content"), MM/DD/YYYY)
+      content:
+        select: main
+        value: textContent(el)
