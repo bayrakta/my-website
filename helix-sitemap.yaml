@@ -6,6 +6,6 @@ sitemaps:
     lastmod: YYYY-MM-DD
   assignments:
     origin: https://main--my-website--bayrakta.hlx.live
-    source: /assignments.json
+    source: /assignments-index.json
     destination: /sitemap-assignments.xml
     lastmod: YYYY-MM-DD
