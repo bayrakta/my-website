@@ -1,4 +1,4 @@
-version: 3
+version: 1
 indices:
   default:
     include:
@@ -16,6 +16,9 @@ indices:
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      publishDate:
+        select: head > meta[name="publish-date"]
+        value: parseTimestamp(attribute(el, "content"), MM/DD/YYYY)
       title:
         select: head > meta[property="og:title"]
         value: attribute(el, "content")
@@ -25,6 +28,12 @@ indices:
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
+      tags:
+        select: head > meta[property="article:tag"]
+        values: attribute(el, "content")
+      content:
+        select: main
+        value: textContent(el)
   assignments:
     include:
       - '/assignments/**'
