@@ -14,11 +14,11 @@
   /* colors */
   --link-color: #035fe6;
   --link-hover-color: #136ff6;
-  --background-color: cyan;
+  --background-color: white;
   --light-color: #eee;
   --light-grey-color: #ccc;
   --dark-color: #ccc;
-  --text-color: magenta;
+  --text-color: black;
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback;
