@@ -33,12 +33,12 @@ indices:
       content:
         select: main
         value: textContent(el)
-  assignments:
+  magazines:
     include:
-      - '/magazine/**'
+      - '/magazines/**'
     exclude:
-      - '/magazine/'
-    target: /magazine/query-index.json
+      - '/magazines/'
+    target: /magazines/query-index.json
     properties:
       lastModified:
         select: none
