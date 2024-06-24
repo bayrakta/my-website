@@ -10,7 +10,6 @@ indices:
       - '/images/**'
       - '/videos/**'
       - '/fragments/**'
-      - '/assignments'
     target: /query-index.json
     properties:
       lastModified:
@@ -39,8 +38,7 @@ indices:
       - '/assignments/**'
     exclude:
       - '/assignments/'
-      - '/assignments/dummy'
-    target: /assignments-index.json
+    target: /assignments/query-index.json
     properties:
       lastModified:
         select: none
