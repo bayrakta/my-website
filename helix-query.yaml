@@ -35,10 +35,10 @@ indices:
         value: textContent(el)
   assignments:
     include:
-      - '/assignments/**'
+      - '/magazine/**'
     exclude:
-      - '/assignments/'
-    target: /assignments/query-index.json
+      - '/magazine/'
+    target: /magazine/query-index.json
     properties:
       lastModified:
         select: none
