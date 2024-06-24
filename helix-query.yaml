@@ -38,7 +38,8 @@ indices:
     include:
       - '/assignments/**'
     exclude:
-      - '/assignments/dummy/**'
+      - '/assignments/'
+      - '/assignments/dummy'
     target: /assignments-index.json
     properties:
       title:
@@ -48,8 +49,8 @@ indices:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
       description:
-          select: head > meta[property="og:description"]
-          value: attribute(el, "content")
+        select: head > meta[property="og:description"]
+        value: attribute(el, "content")
       tags:
         select: head > meta[property="article:tag"]
         values: attribute(el, "content")

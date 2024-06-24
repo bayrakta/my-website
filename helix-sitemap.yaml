@@ -1,11 +1,6 @@
 sitemaps:
   allindex:
-    origin: https://main--my-website--bayrakta.hlx.live
+    origin: https://www.edsmaster.org
     source: /query-index.json
     destination: /sitemap.xml
-    lastmod: YYYY-MM-DD
-  assignments:
-    origin: https://main--my-website--bayrakta.hlx.live
-    source: /assignments-index.json
-    destination: /sitemap-assignments.xml
     lastmod: YYYY-MM-DD
