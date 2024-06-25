@@ -2,3 +2,4 @@ User-agent: *
 Disallow:
 
 Sitemap: https://www.edsmaster.org/sitemap.xml
+Sitemap: https://www.edsmaster.org/magazines/sitemap.xml
