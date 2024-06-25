@@ -586,6 +586,41 @@ function updateSectionsStatus(main) {
 }
 
 /**
+ * Create an element with the given id and classes.
+ * @param {string} tagName the tag
+ * @param {Object} options the element options
+ * @param {string[]|string} [options.classes=[]] the class or classes to add
+ * @param {Object} [options.attributes={}] any other attributes to add to the element
+ * @param {Object} [options.props={}] any other properties to add to the element
+ * @returns {HTMLElement} the element
+ */
+function createElement(tagName, options = {}) {
+  const { classes = [], attributes = {}, props = {} } = options;
+  const elem = document.createElement(tagName);
+  const isString = typeof classes === 'string';
+  if (classes || (isString && classes !== '') || (!isString && classes.length > 0)) {
+    const classesArr = isString ? [classes] : classes;
+    elem.classList.add(...classesArr);
+  }
+  if (!isString && classes.length === 0) elem.removeAttribute('class');
+
+  if (attributes) {
+    Object.keys(attributes).forEach((attributeName) => {
+      const value = attributeName === attributes[attributeName] ? '' : attributes[attributeName];
+      elem.setAttribute(attributeName, value);
+    });
+  }
+
+  if (props) {
+    Object.keys(props).forEach((propName) => {
+      elem[propName] = propName === props[propName] ? '' : props[propName];
+    });
+  }
+
+  return elem;
+}
+
+/**
  * Builds a block DOM Element from a two dimensional array, string, or object
  * @param {string} blockName name of the block
  * @param {*} content two dimensional array or string or object of content
@@ -743,6 +778,7 @@ async function waitForLCP(lcpBlocks) {
 init();
 
 export {
+  createElement,
   buildBlock,
   createOptimizedPicture,
   decorateBlock,
