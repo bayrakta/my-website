@@ -32,18 +32,19 @@
 
 .cards > ul > li p {
   color: dimgray;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 14px;
   height: auto;
   line-height: 27px;
   list-style-image: none;
   list-style-position: outside;
   text-align: left;
   text-transform: uppercase;
-  width: auto
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cards > ul > li a.button {
-  color: rgb(32 32 32);
   cursor: pointer;
 }

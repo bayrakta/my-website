@@ -1,0 +1,114 @@
+.contributors > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
+  grid-gap: 16px;
+}
+
+.contributors > ul > li {
+  background-color: var(--background-color);
+  color: #202020;
+}
+
+.contributors .contributors-contributor-body {
+  margin: 16px;
+  text-align: center;
+}
+
+.contributors .contributors-contributor-image {
+  line-height: 0;
+  text-align: center;
+}
+
+.contributors .contributors-contributor-body > *:first-child {
+  margin-top: 0;
+}
+
+.contributors > ul > li img {
+  aspect-ratio: auto 1152 / 1152;
+  margin-bottom: 7px;
+  margin-top: 7px;
+  border-radius: 50%;
+  height: 164px;
+  object-fit: cover;
+  width: 164px;
+  text-align: center;
+}
+
+.contributors > ul > li p {
+  color: dimgray;
+  font-size: 18px;
+  font-weight: 600;
+  height: auto;
+  line-height: 27px;
+  list-style-image: none;
+  list-style-position: outside;
+  text-align: left;
+  text-transform: uppercase;
+  width: auto
+}
+
+.contributors > ul > li a.button {
+  color: rgb(32 32 32);
+  cursor: pointer;
+}
+
+.contributors .contributors-social-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.contributors .contributors-social-container .cmp-button {
+  color: #202020;
+  float: left;
+  text-transform: uppercase
+}
+
+.contributors .contributors-social-container .cmp-button .cmp-button-text {
+  float: left;
+  padding: 1rem 2rem
+}
+
+.contributors .contributors-social-container .cmp-button-primary .cmp-button {
+  background-color: #ffea00;
+}
+
+.contributors .contributors-social-container .cmp-button-secondary .cmp-button {
+  background-color: #202020;
+  color: #ebebeb;
+}
+
+.contributors .contributors-social-container .cmp-button .cmp-button-icon {
+  float: left;
+  font-size: 1.25em;
+  padding-left: 14px;
+  padding-top: 18px
+}
+
+.contributors .contributors-social-container .cmp-button .cmp-button-icon-facebook::before {
+  content: ""
+}
+
+.contributors .contributors-social-container .cmp-button .cmp-button-icon-twitter::before {
+  content: ""
+}
+
+.contributors .contributors-social-container .cmp-button .cmp-button-icon-instagram::before {
+  content: ""
+}
+
+.contributors .contributors-social-container .cmp-button-icononly .cmp-button {
+  height: 3pc;
+  width: 3pc;
+}
+
+.contributors .contributors-social-container .cmp-button-icononly .cmp-button .cmp-button-icon {
+  float: left
+}
+
+.contributors .contributors-social-container .cmp-button-icononly .cmp-button .cmp-button-text {
+  display: none
+}
