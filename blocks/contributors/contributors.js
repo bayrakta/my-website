@@ -33,7 +33,7 @@ const wrapSocialLinks = (blockName, socialLinksSection) => {
   let instagramLink = null;
 
   [...socialLinksSection.children].forEach((child) => {
-    if (child.tagName === 'H3') {
+    if (userId == null && (child.tagName === 'H3' || child.tagName === 'H2')) {
       userId = child.id;
     }
     if (child.textContent.includes('Facebook')) {
