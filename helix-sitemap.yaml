@@ -5,6 +5,6 @@ sitemaps:
     destination: /sitemap.xml
     lastmod: YYYY-MM-DD
   magazines:
-    source: /magazines/query-index.json
-    destination: /magazines/sitemap.xml
+    source: /magazine/query-index.json
+    destination: /magazine/sitemap.xml
     lastmod: YYYY-MM-DD
