@@ -186,18 +186,17 @@ header nav .nav-sections ul > li {
   text-transform: uppercase;
 }
 
-
-header nav .nav-sections ul > li:focus,
-header nav .nav-sections ul > li:hover {
-  background-color: #ffea00;
-}
-
 header nav .nav-sections ul > li > ul {
   margin-top: 0;
 }
 
 header nav .nav-sections ul > li > ul > li {
   font-weight: 500;
+}
+
+header nav .nav-sections ul > li:focus,
+header nav .nav-sections ul > li:hover {
+  background-color: #ffea00;
 }
 
 @media (width >= 900px) {
