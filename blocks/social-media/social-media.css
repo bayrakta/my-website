@@ -1,0 +1,63 @@
+.social-media > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.social-media img {
+  width: 100%;
+}
+
+.social-media > div > div {
+  order: 1;
+}
+
+.social-media > div > .social-media-img-col {
+  order: 0;
+}
+
+.social-media > div > .social-media-img-col img {
+  display: block;
+}
+
+
+.social-media > ul > li p {
+  color: dimgray;
+  font-size: 18px;
+  font-weight: 600;
+  height: auto;
+  line-height: 27px;
+  list-style-image: none;
+  list-style-position: outside;
+  text-align: left;
+  text-transform: uppercase;
+  width: auto
+}
+
+.social-media > ul > li a.button {
+  color: rgb(32 32 32);
+  cursor: pointer;
+}
+
+.social-media .social-media-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.social-media .social-media-container p {
+  align-content: center;
+  margin-inline-end: 20px;
+}
+
+@media (width >= 900px) {
+  .social-media > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 32px;
+  }
+
+  .social-media > div > div {
+    flex: 1;
+    order: unset;
+  }
+}

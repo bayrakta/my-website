@@ -213,3 +213,57 @@ main .section.highlight {
 main .section.lightgrey {
   background-color: var(--light-grey-color);
 }
+
+/* Social media relevant */
+
+.cmp-button {
+  color: #202020;
+  float: left;
+  text-transform: uppercase
+}
+
+.cmp-button .cmp-button-text {
+  float: left;
+  padding: 1rem 2rem
+}
+
+.cmp-button-primary .cmp-button {
+  background-color: #ffea00;
+}
+
+.cmp-button-secondary .cmp-button {
+  background-color: #202020;
+  color: #ebebeb;
+}
+
+.cmp-button .cmp-button-icon {
+  float: left;
+  font-size: 1.25em;
+  padding-left: 14px;
+  padding-top: 18px
+}
+
+.cmp-button .cmp-button-icon-facebook::before {
+  content: ""
+}
+
+.cmp-button .cmp-button-icon-twitter::before {
+  content: ""
+}
+
+.cmp-button .cmp-button-icon-instagram::before {
+  content: ""
+}
+
+.cmp-button-icononly .cmp-button {
+  height: 3pc;
+  width: 3pc;
+}
+
+.cmp-button-icononly .cmp-button .cmp-button-icon {
+  float: left
+}
+
+.cmp-button-icononly .cmp-button .cmp-button-text {
+  display: none
+}
