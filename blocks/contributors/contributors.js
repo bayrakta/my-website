@@ -1,6 +1,6 @@
 import {
   createElement,
-  createOptimizedPicture, toCamelCase,
+  createOptimizedPicture,
 } from '../../scripts/aem.js';
 
 const FACEBOOK_URL = 'https://www.facebook.com';
