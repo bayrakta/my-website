@@ -15,6 +15,8 @@
 .contributors .contributors-contributor-body {
   margin: 16px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .contributors .contributors-contributor-image {
@@ -59,4 +61,23 @@
   display: flex;
   justify-content: center;
   text-align: center;
+  color: #202020;
+  padding-top: 1em;
+}
+
+.contributors .contributors-social-contributor-title {
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: .25em;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+.contributors .contributors-social-contributor-roles {
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: .25em;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
 }

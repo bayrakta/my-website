@@ -1,6 +1,6 @@
 import {
   createElement,
-  createOptimizedPicture,
+  createOptimizedPicture, toCamelCase,
 } from '../../scripts/aem.js';
 
 const FACEBOOK_URL = 'https://www.facebook.com';
@@ -59,26 +59,34 @@ const createSocialLink = (socialName, socialStyleName, socialLink) => {
 };
 
 const wrapSocialLinks = (blockName, socialLinksSection) => {
+  let displayName = null;
+  let roleText = null;
   let userId = null;
   let facebookLink = null;
   let twitterLink = null;
   let instagramLink = null;
 
-  [...socialLinksSection.children].forEach((child) => {
-    if (userId == null && (child.tagName === 'H3' || child.tagName === 'H2')) {
-      userId = child.id;
-    }
-    if (child.textContent.includes('Facebook')) {
-      facebookLink = `${FACEBOOK_URL}/${userId}`;
-      child.remove();
-    }
-    if (child.textContent.includes('Twitter')) {
-      twitterLink = `${TWITTER_URL}/${userId}`;
-      child.remove();
-    }
-    if (child.textContent.includes('Instagram')) {
-      instagramLink = `${INSTAGRAM_URL}/${userId}`;
-      child.remove();
+  [...socialLinksSection.children].forEach((child, i) => {
+    if (i === 0) {
+      displayName = child.innerHTML;
+      userId = displayName.toLowerCase().replace(/\s/g, '');
+      child.replaceWith(createElementFromHTML(`<span class="${blockName}-social-contributor-title">${displayName}</span>`));
+    } else if (i === 1) {
+      roleText = child.innerHTML;
+      child.replaceWith(createElementFromHTML(`<span class="${blockName}-social-contributor-roles">${roleText}</span>`));
+    } else {
+      if (child.textContent.includes('Facebook')) {
+        facebookLink = `${FACEBOOK_URL}/${userId}`;
+        child.remove();
+      }
+      if (child.textContent.includes('Twitter')) {
+        twitterLink = `${TWITTER_URL}/${userId}`;
+        child.remove();
+      }
+      if (child.textContent.includes('Instagram')) {
+        instagramLink = `${INSTAGRAM_URL}/${userId}`;
+        child.remove();
+      }
     }
   });
   if (userId == null || (facebookLink == null && twitterLink == null && instagramLink == null)) {
@@ -161,8 +169,8 @@ export default async function decorate(block) {
         const instagramAlias = instagramUserName.length > 0 ? instagramUserName : username;
 
         const contributorBody = createElementFromHTML(`<div class="contributors-contributor-body">
-                  <h3>${displayName}</h3>
-                  <h5>${roleText}</h5>
+                  <span class="${blockName}-social-contributor-title">${displayName}</span>
+                  <span class="${blockName}-social-contributor-roles">${roleText}</span>
                   <div class="contributors-social-container">
                     <div class="cmp-button-secondary cmp-button-icononly"><a class="cmp-button" aria-label="Facebook Social Media"
                         href="${FACEBOOK_URL}/${facebookAlias}"><span class="cmp-button-icon cmp-button-icon-facebook" aria-hidden="true"></span>
