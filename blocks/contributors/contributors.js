@@ -7,6 +7,38 @@ const FACEBOOK_URL = 'https://www.facebook.com';
 const TWITTER_URL = 'https://www.twitter.com';
 const INSTAGRAM_URL = 'https://www.instagram.com';
 
+const CONTRIBUTORS_FOLDER = '/contributors';
+const PN_CONTRIBUTOR_USERNAME = 'Username';
+const PN_CONTRIBUTOR_DISPLAY_NAME = 'Display Name';
+const PN_CONTRIBUTOR_ROLES = 'Roles';
+const PN_CONTRIBUTOR_FACEBOOK = 'Facebook';
+const PN_CONTRIBUTOR_TWITTER = 'Twitter';
+const PN_CONTRIBUTOR_INSTAGRAM = 'Instagram';
+const PN_CONTRIBUTOR_PICTURE = 'Picture';
+
+const createElementFromHTML = (htmlString) => {
+  const div = document.createElement('div');
+  div.innerHTML = htmlString.trim();
+  const { firstChild } = div;
+  firstChild.remove();
+
+  // Change this to div.childNodes to support multiple top-level nodes.
+  return firstChild;
+};
+
+const resolveContributor = (contributors, username) => {
+  if (!contributors || !contributors.data || !username) {
+    return null;
+  }
+  for (let i = 0; i < contributors.data.length; i += 1) {
+    const contributor = contributors.data[i];
+    if (contributor && contributor[PN_CONTRIBUTOR_USERNAME] === username) {
+      return contributor;
+    }
+  }
+  return null;
+};
+
 const createSocialLink = (socialName, socialStyleName, socialLink) => {
   const socialLinkWrapper = createElement('div', { classes: ['cmp-button-secondary', 'cmp-button-icononly'] });
   const socialLinkElement = createElement('a', {
@@ -73,23 +105,96 @@ export default async function decorate(block) {
   // const placeholders = await fetchPlaceholders('default');
   // const { clickHereForMore } = placeholders;
 
+  const resp = await fetch(`${CONTRIBUTORS_FOLDER}/contributors.json`);
+  const contributors = await resp.json();
+
+  // eslint-disable-next-line no-console
+  console.log(`contributors ${contributors}`);
+
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = createElement('li');
-    while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = `${blockName}-contributor-image`;
-      else {
-        div.className = `${blockName}-contributor-body`;
-        wrapSocialLinks(blockName, div);
+    while (row.firstElementChild) {
+      const rowFirstChild = row.firstElementChild;
+      let contributor = null;
+      if (rowFirstChild.children.length === 1) {
+        contributor = resolveContributor(contributors, rowFirstChild.innerText.trim());
       }
-    });
+
+      if (contributor !== null) {
+        // Remove the current child so that the while loop proceeds
+        rowFirstChild.remove();
+
+        if (PN_CONTRIBUTOR_PICTURE in contributor && contributor[PN_CONTRIBUTOR_PICTURE]) {
+          const pictureFileName = contributor[PN_CONTRIBUTOR_PICTURE];
+          const pictureContainer = createElementFromHTML(`<div class="contributors-contributor-image">
+            <picture>
+              <source type="image/webp" srcset="${CONTRIBUTORS_FOLDER}/${pictureFileName}?width=750&amp;format=webply&amp;optimize=medium">
+              <img loading="lazy" alt="" src="${CONTRIBUTORS_FOLDER}/${pictureFileName}?width=750&amp;format=jpeg&amp;optimize=medium">
+            </picture>
+          </div>`);
+
+          li.append(pictureContainer);
+        }
+
+        const username = contributor[PN_CONTRIBUTOR_USERNAME].trim();
+        const displayName = contributor[PN_CONTRIBUTOR_DISPLAY_NAME].trim();
+        const rolesStr = contributor[PN_CONTRIBUTOR_ROLES].trim();
+        const facebookUserName = contributor[PN_CONTRIBUTOR_FACEBOOK].trim();
+        const twitterUserName = contributor[PN_CONTRIBUTOR_TWITTER].trim();
+        const instagramUserName = contributor[PN_CONTRIBUTOR_INSTAGRAM].trim();
+        let roleText = '';
+        if (rolesStr) {
+          const roleArray = rolesStr.split(',');
+          for (let i = 0; i < roleArray.length; i += 1) {
+            const role = roleArray[i].trim();
+            if (i > 0) {
+              roleText += ' | ';
+            }
+            roleText += role;
+          }
+        }
+
+        const facebookAlias = facebookUserName.length > 0 ? facebookUserName : username;
+        const twitterAlias = twitterUserName.length > 0 ? twitterUserName : username;
+        const instagramAlias = instagramUserName.length > 0 ? instagramUserName : username;
+
+        const contributorBody = createElementFromHTML(`<div class="contributors-contributor-body">
+                  <h3>${displayName}</h3>
+                  <h5>${roleText}</h5>
+                  <div class="contributors-social-container">
+                    <div class="cmp-button-secondary cmp-button-icononly"><a class="cmp-button" aria-label="Facebook Social Media"
+                        href="${FACEBOOK_URL}/${facebookAlias}"><span class="cmp-button-icon cmp-button-icon-facebook" aria-hidden="true"></span>
+                        <span class="cmp-button-text">Facebook</span></a></div>
+                    <div class="cmp-button-secondary cmp-button-icononly"><a class="cmp-button" aria-label="Twitter Social Media"
+                        href="${TWITTER_URL}/${twitterAlias}"><span class="cmp-button-icon cmp-button-icon-twitter" aria-hidden="true"></span>
+                        <span class="cmp-button-text">Twitter</span></a></div>
+                    <div class="cmp-button-secondary cmp-button-icononly"><a class="cmp-button" aria-label="Instagram Social Media"
+                        href="${INSTAGRAM_URL}/${instagramAlias}"><span class="cmp-button-icon cmp-button-icon-instagram" aria-hidden="true"></span>
+                        <span class="cmp-button-text">Instagram</span></a></div>
+                  </div>
+                </div>`);
+
+        li.append(contributorBody);
+      } else {
+        li.append(rowFirstChild);
+
+        if (rowFirstChild.children.length === 1 && rowFirstChild.querySelector('picture')) {
+          rowFirstChild.className = `${blockName}-contributor-image`;
+        } else {
+          rowFirstChild.className = `${blockName}-contributor-body`;
+          wrapSocialLinks(blockName, rowFirstChild);
+        }
+      }
+    }
 
     ul.append(li);
   });
 
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  ul.querySelectorAll('img')
+    .forEach((img) => img.closest('picture')
+      .replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   block.textContent = '';
   block.append(ul);
 }
